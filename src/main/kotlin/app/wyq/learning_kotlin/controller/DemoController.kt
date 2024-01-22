@@ -1,5 +1,6 @@
 package app.wyq.learning_kotlin.controller
 
+import app.wyq.learning_kotlin.exception.FruitNotFoundException
 import app.wyq.learning_kotlin.model.Fruit
 import org.springframework.http.HttpStatus
 import org.springframework.web.bind.annotation.*
@@ -34,7 +35,8 @@ class DemoController {
     }
 
     @GetMapping("/{id}")
-    fun getFruitById(@PathVariable id: Int) : Fruit? {
-        return  fruits.firstOrNull { it.id == id }
+    fun getFruitById(@PathVariable id: Int) : Fruit {
+        val fruit = fruits.firstOrNull { it.id == id }
+        return  fruit?: throw FruitNotFoundException()
     }
 }
