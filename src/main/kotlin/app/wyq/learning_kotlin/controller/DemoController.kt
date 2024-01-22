@@ -32,4 +32,9 @@ class DemoController {
         fruits.add(newFruit)
         return newFruit
     }
+
+    @GetMapping("/{id}")
+    fun getFruitById(@PathVariable id: Int) : Fruit? {
+        return  fruits.firstOrNull { it.id == id }
+    }
 }
